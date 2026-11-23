@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PromptFlow</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="shell" data-screen="library" data-layout="splitHorizontal" data-offset="0" data-playing="false" data-role="solo">
+    <header id="top">
+      <button id="back" type="button" hidden>文稿</button>
+      <div class="mark" aria-hidden="true">PF</div>
+      <div class="titles">
+        <p class="eyebrow">PromptFlow</p>
+        <h1 id="heading">讲稿库</h1>
+      </div>
+      <p id="status" class="status"></p>
+    </header>
+    <div id="file-hint" hidden>
+      <p>这个页面需要本地服务才能加载脚本。在 windows 目录运行 <code>npm start</code>，然后打开终端里打印的地址。</p>
+    </div>
+    <script>
+      if (location.protocol === "file:") {
+        var hint = document.getElementById("file-hint");
+        if (hint) hint.hidden = false;
+        var library = document.getElementById("library");
+        if (library) library.hidden = true;
+      }
+    </script>
+    <main id="library"></main>
+    <section id="stage">
+      <div id="director">
+        <label class="field-label" for="editor">讲稿</label>
+        <textarea id="editor" spellcheck="false"></textarea>
+        <ol id="outline"></ol>
+      </div>
+      <div id="prompt-pane">
+        <canvas id="prompter" width="1280" height="720"></canvas>
+        <p id="cue-meta"></p>
+      </div>
+    </section>
+    <footer id="transport">
+      <button id="pause" type="button" data-action="pause">开始</button>
+      <button type="button" data-action="slower">减速</button>
+      <span id="speed" data-speed="1">1.0×</span>
+      <button type="button" data-action="faster">加速</button>
+      <button type="button" data-action="prev">上一段</button>
+      <button type="button" data-action="next">下一段</button>
+      <button type="button" data-action="theme">主题</button>
+      <button type="button" data-action="mirror-h">左右镜像</button>
+      <button type="button" data-action="mirror-v">上下镜像</button>
+      <button id="mint" type="button" data-action="mint">生成口令</button>
+      <span id="passcode" data-passcode=""></span>
+      <input id="join-code" inputmode="numeric" maxlength="7" placeholder="六位口令" aria-label="六位口令">
+      <button id="join" type="button" data-action="join">加入</button>
+      <button id="drop" type="button" data-action="drop">断开</button>
+    </footer>
+  </div>
+  <script type="module" src="./src/ui/app.js"></script>
+</body>
+</html>

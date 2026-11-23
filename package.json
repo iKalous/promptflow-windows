@@ -1,0 +1,13 @@
+{
+  "name": "promptflow-windows",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node --test",
+    "package": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/build-app.ps1"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}
